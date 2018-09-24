@@ -1,2 +1,2 @@
-# flycar
-Autonomous car for trolling biting flies
+# AutoCar
+Autonomous car based on Raspberry PI and an off-the-shelf RC car
