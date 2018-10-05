@@ -47,14 +47,15 @@ while True:
     if command == 's':
         stop()
     elif command == 'f':
-        f(0.2)
+        f(0.4)
     elif command == 'b':
-        b(0.2)
+        b(0.4)
     elif command == 'l':
-        l(0.8)
+        l(0.1)
     elif command == 'r':
-        r(0.8)
-    
+        r(0.1)
+    elif command == 'straight':
+		s()
 
     if controller:
         evbuf = jsdev.read(8)
