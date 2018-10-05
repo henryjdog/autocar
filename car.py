@@ -5,7 +5,7 @@
 import os, struct, array
 from time import sleep
 from fcntl import ioctl
-import motors
+from motors import *
 from imu import IMU
 from controller import Controller
 
