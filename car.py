@@ -31,7 +31,7 @@ while True:
         acc_y_init = acc_y_value
         acc_z_init = acc_z_value
 
-	acc_x.append(acc_x_value - acc_x_init)
+    acc_x.append(acc_x_value - acc_x_init)
     acc_y.append(acc_y_value - acc_y_init)
     acc_z.append(acc_z_value - acc_z_init)
     
@@ -40,7 +40,7 @@ while True:
     acc_z_read = sum(acc_z[:-3])/3
 
     speed_x = speed_x + acc_x_read*0.5
-	print(acc_x)
+    print(acc_x)
     print(speed_x)
     sleep(0.5)
     
