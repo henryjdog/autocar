@@ -43,17 +43,17 @@ while True:
     print(acc_x)
     print(speed_x)
     
-	command = raw_input('enter command')
-	if command == 's':
-		stop()
-	elif command == 'f':
-		f(0.2)
-	elif command == 'b':
-		b(0.2)
-	elif command == 'l':
-		l(0.8)
-	elif command = 'r':
-		r(0.8)
+    command = raw_input('enter command')
+    if command == 's':
+        stop()
+    elif command == 'f':
+        f(0.2)
+    elif command == 'b':
+        b(0.2)
+    elif command == 'l':
+        l(0.8)
+    elif command = 'r':
+        r(0.8)
     
 
     if controller:
