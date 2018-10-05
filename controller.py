@@ -138,8 +138,8 @@ class Controller():
 			self.button_map.append(btn_name)
 			self.button_states[btn_name] = 0
 
-		print '%d axes found: %s' % (num_axes, ', '.join(self.axis_map))
-		print '%d buttons found: %s' % (num_buttons, ', '.join(self.button_map))
+		print('%d axes found: %s' % (num_axes, ', '.join(self.axis_map)))
+		print('%d buttons found: %s' % (num_buttons, ', '.join(self.button_map)))
 		
 	def read(self):
 		type = None
@@ -158,16 +158,16 @@ class Controller():
 				if button:
 					self.button_states[button] = value
 					if value:
-						print "%s pressed" % (button)
+						print("%s pressed" % (button))
 					else:
-						print "%s released" % (button)
+						print("%s released" % (button))
 
 			elif type & 0x02:
 				axis = self.axis_map[number]
 				if axis:
 					fvalue = value / 32767.0
 					self.axis_states[axis] = fvalue
-					print "%s: %.3f" % (axis, fvalue)
+					print("%s: %.3f" % (axis, fvalue))
 					if axis == 'x' or axis == 'hat0x':
 						if fvalue > 0.01:
 							r(fvalue)

@@ -17,7 +17,7 @@ except:
 
 # Main event loop
 while True:
-    print imu.read()
+    print(imu.read())
     sleep(0.5)
     
     if controller:
@@ -26,23 +26,23 @@ while True:
             time, value, type, number = struct.unpack('IhBB', evbuf)
 
             if type & 0x80:
-                 print "(initial)",
+                 print("(initial)",)
 
             if type & 0x01:
                 button = button_map[number]
                 if button:
                     button_states[button] = value
                     if value:
-                        print "%s pressed" % (button)
+                        print("%s pressed" % (button))
                     else:
-                        print "%s released" % (button)
+                        print("%s released" % (button))
 
             if type & 0x02:
                 axis = axis_map[number]
                 if axis:
                     fvalue = value / 32767.0
                     axis_states[axis] = fvalue
-                    print "%s: %.3f" % (axis, fvalue)
+                    print("%s: %.3f" % (axis, fvalue))
                     if axis == 'x' or axis == 'hat0x':
                         if fvalue > 0.01:
                             r(fvalue)
