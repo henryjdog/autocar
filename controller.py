@@ -141,7 +141,7 @@ class Controller():
 		print '%d axes found: %s' % (num_axes, ', '.join(self.axis_map))
 		print '%d buttons found: %s' % (num_buttons, ', '.join(self.button_map))
 		
-	def read_controller(self):
+	def read(self):
 		type = None
 		axis = None
 		button = None
