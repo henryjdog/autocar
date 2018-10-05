@@ -52,7 +52,7 @@ while True:
         b(0.2)
     elif command == 'l':
         l(0.8)
-    elif command = 'r':
+    elif command == 'r':
         r(0.8)
     
 
