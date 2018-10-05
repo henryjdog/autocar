@@ -48,14 +48,21 @@ while True:
         stop()
     elif command == 'f':
         f(0.4)
+        print('forward')
     elif command == 'b':
         b(0.4)
+        print('backward')
     elif command == 'l':
         l(0.1)
+        print('left')
     elif command == 'r':
         r(0.1)
+        print('right')
     elif command == 'straight':
-		s()
+        l()
+        r()
+        print('straight')
+
 
     if controller:
         evbuf = jsdev.read(8)
