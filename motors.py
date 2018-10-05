@@ -46,6 +46,9 @@ def r(pct=0.0):
     stop([lpwm, rpwm])
     rpwm.ChangeDutyCycle(pct*100)
 
+def s():
+	stop([lpwm, rpwm])
+	
 if __name__ == '__main__':
     f(0.5)
     time.sleep(0.5)
