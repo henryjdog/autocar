@@ -61,9 +61,10 @@ lib.lsm9ds1_calcMag.argtypes = [c_void_p, c_float]
 lib.lsm9ds1_calcMag.restype = c_float
 
 class IMU():
-    self.last_read_time = 0
+
     
     def __init__(self):
+        self.last_read_time = 0
         self.imu = lib.lsm9ds1_create()
         lib.lsm9ds1_begin(self.imu)
         if lib.lsm9ds1_begin(self.imu) == 0:
