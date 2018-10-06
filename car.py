@@ -53,10 +53,10 @@ while True:
         b(0.4)
         print('backward')
     elif command == 'l':
-        l(0.1)
+        l(0.5)
         print('left')
     elif command == 'r':
-        r(0.1)
+        r(0.5)
         print('right')
     elif command == 'straight':
         l()
