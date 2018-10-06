@@ -60,35 +60,35 @@ lib.lsm9ds1_calcMag.restype = c_float
 
 class IMU():
     def __init__(self):
-        imu = lib.lsm9ds1_create()
-        lib.lsm9ds1_begin(imu)
-        if lib.lsm9ds1_begin(imu) == 0:
+        self.imu = lib.lsm9ds1_create()
+        lib.lsm9ds1_begin(self.imu)
+        if lib.lsm9ds1_begin(self.imu) == 0:
             print("Failed to communicate with LSM9DS1.")
             quit()
-        lib.lsm9ds1_calibrate(imu)
+        lib.lsm9ds1_calibrate(self.imu)
 
     def read(self):
-        while lib.lsm9ds1_gyroAvailable(imu) == 0:
+        while lib.lsm9ds1_gyroAvailable(self.imu) == 0:
             pass
-        lib.lsm9ds1_readGyro(imu)
-        while lib.lsm9ds1_accelAvailable(imu) == 0:
+        lib.lsm9ds1_readGyro(self.imu)
+        while lib.lsm9ds1_accelAvailable(self.imu) == 0:
             pass
-        lib.lsm9ds1_readAccel(imu)
-        while lib.lsm9ds1_magAvailable(imu) == 0:
+        lib.lsm9ds1_readAccel(self.imu)
+        while lib.lsm9ds1_magAvailable(self.imu) == 0:
             pass
-        lib.lsm9ds1_readMag(imu)
+        lib.lsm9ds1_readMag(self.imu)
 
-        gx = lib.lsm9ds1_getGyroX(imu)
-        gy = lib.lsm9ds1_getGyroY(imu)
-        gz = lib.lsm9ds1_getGyroZ(imu)
+        gx = lib.lsm9ds1_getGyroX(self.imu)
+        gy = lib.lsm9ds1_getGyroY(self.imu)
+        gz = lib.lsm9ds1_getGyroZ(self.imu)
         
-        ax = lib.lsm9ds1_getAccelX(imu)
-        ay = lib.lsm9ds1_getAccelY(imu)
-        az = lib.lsm9ds1_getAccelZ(imu)
+        ax = lib.lsm9ds1_getAccelX(self.imu)
+        ay = lib.lsm9ds1_getAccelY(self.imu)
+        az = lib.lsm9ds1_getAccelZ(self.imu)
 
-        mx = lib.lsm9ds1_getMagX(imu)
-        my = lib.lsm9ds1_getMagY(imu)
-        mz = lib.lsm9ds1_getMagZ(imu)
+        mx = lib.lsm9ds1_getMagX(self.imu)
+        my = lib.lsm9ds1_getMagY(self.imu)
+        mz = lib.lsm9ds1_getMagZ(self.imu)
 
         cgx = lib.lsm9ds1_calcGyro(imu, gx)
         cgy = lib.lsm9ds1_calcGyro(imu, gy)
