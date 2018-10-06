@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import datetime as dt
 #import ctypes
 from ctypes import *
+
 
 path = "../LSM9DS1_RaspberryPi_Library/lib/liblsm9ds1cwrapper.so"
 lib = cdll.LoadLibrary(path)
@@ -59,6 +61,8 @@ lib.lsm9ds1_calcMag.argtypes = [c_void_p, c_float]
 lib.lsm9ds1_calcMag.restype = c_float
 
 class IMU():
+    self.last_read_time = 0
+    
     def __init__(self):
         self.imu = lib.lsm9ds1_create()
         lib.lsm9ds1_begin(self.imu)
@@ -90,17 +94,19 @@ class IMU():
         my = lib.lsm9ds1_getMagY(self.imu)
         mz = lib.lsm9ds1_getMagZ(self.imu)
 
-        cgx = lib.lsm9ds1_calcGyro(imu, gx)
-        cgy = lib.lsm9ds1_calcGyro(imu, gy)
-        cgz = lib.lsm9ds1_calcGyro(imu, gz)
+        cgx = lib.lsm9ds1_calcGyro(self.imu, gx)
+        cgy = lib.lsm9ds1_calcGyro(self.imu, gy)
+        cgz = lib.lsm9ds1_calcGyro(self.imu, gz)
         self.gyro = (cgx, cgy, cgz)
         
-        cax = lib.lsm9ds1_calcAccel(imu, ax)
-        cay = lib.lsm9ds1_calcAccel(imu, ay)
-        caz = lib.lsm9ds1_calcAccel(imu, az)
+        cax = lib.lsm9ds1_calcAccel(self.imu, ax)
+        cay = lib.lsm9ds1_calcAccel(self.imu, ay)
+        caz = lib.lsm9ds1_calcAccel(self.imu, az)
         self.accel = (cax, cay, caz)
         
-        cmx = lib.lsm9ds1_calcMag(imu, mx)
-        cmy = lib.lsm9ds1_calcMag(imu, my)
-        cmz = lib.lsm9ds1_calcMag(imu, mz)
+        cmx = lib.lsm9ds1_calcMag(self.imu, mx)
+        cmy = lib.lsm9ds1_calcMag(self.imu, my)
+        cmz = lib.lsm9ds1_calcMag(self.imu, mz)
         self.mag = (cmx, cmy, cmz)
+
+        self.last_read_time = dt.datetime.now()
