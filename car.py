@@ -3,6 +3,7 @@
 # https://www.kernel.org/doc/Documentation/input/joystick-api.txt
 
 import os, struct, array
+import pandas as pd
 from time import sleep
 from fcntl import ioctl
 from motors import *
@@ -23,45 +24,38 @@ speed_x = 0.0
 speed_y = 0.0
 speed_z = 0.0
 
+columns=['ts', 'gyro_x', 'gyro_y', 'gyro_z', 'acc_x', 'acc_y', 'acc_z', 'mag_x', 'mag_y', 'mag_z']
+car_df = pd.DataFrame(columns=columns)
+
+imu.read()
+car_df = car_df.append(dict(zip(columns, imu.meas)))
+
+mode = 'auto'
 # Main event loop
 while True:
-    acc_x_value, acc_y_value, acc_z_value = imu.read()[3:6]
-    if len(acc_x) == 0:
-        acc_x_init = acc_x_value
-        acc_y_init = acc_y_value
-        acc_z_init = acc_z_value
+    imu.read()
+    car_df = car_df.append(dict(zip(columns, imu.meas)))
 
-    acc_x.append(acc_x_value - acc_x_init)
-    acc_y.append(acc_y_value - acc_y_init)
-    acc_z.append(acc_z_value - acc_z_init)
-    
-    acc_x_read = sum(acc_x[:-3])/3
-    acc_y_read = sum(acc_y[:-3])/3
-    acc_z_read = sum(acc_z[:-3])/3
-
-    speed_x = speed_x + acc_x_read*0.5
-    print(acc_x)
-    print(speed_x)
-    
-    command = raw_input('enter command')
-    if command == 's':
-        stop()
-    elif command == 'f':
-        f(0.4)
-        print('forward')
-    elif command == 'b':
-        b(0.4)
-        print('backward')
-    elif command == 'l':
-        l(0.5)
-        print('left')
-    elif command == 'r':
-        r(0.5)
-        print('right')
-    elif command == 'straight':
-        l()
-        r()
-        print('straight')
+    if mode[:3] == 'man':
+        command = raw_input('enter command')
+        if command == 's':
+            stop()
+        elif command == 'f':
+            f(0.4)
+            print('forward')
+        elif command == 'b':
+            b(0.4)
+            print('backward')
+        elif command == 'l':
+            l(0.5)
+            print('left')
+        elif command == 'r':
+            r(0.5)
+            print('right')
+        elif command == 'straight':
+            l()
+            r()
+            print('straight')
 
 
     if controller:
