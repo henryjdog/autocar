@@ -111,4 +111,4 @@ class IMU():
         self.mag = (cmx, cmy, cmz)
 
         self.last_read_time = dt.datetime.now()
-        self.meas = (self.last_read_time, gx,gy,gz,ax,ay,az,mx,my,mz)
+        self.meas = (self.last_read_time, cgx, cgy, cgz, cax, cay, caz, cmx, cmy, cmz)

@@ -7,10 +7,10 @@ import pandas as pd
 from time import sleep
 from fcntl import ioctl
 from motors import *
-from imu import IMU
+import imu_lib
 from controller import Controller
 
-imu = IMU()
+imu = imu_lib.IMU()
 try:
     controller = Controller()
 except:
@@ -28,7 +28,7 @@ columns=['ts', 'gyro_x', 'gyro_y', 'gyro_z', 'acc_x', 'acc_y', 'acc_z', 'mag_x',
 car_df = pd.DataFrame(columns=columns)
 
 imu.read()
-car_df = car_df.append(dict(zip(columns, imu.meas)))
+car_df = car_df.append(dict(zip(columns, imu.meas)), ignore_index=True)
 
 mode = 'auto'
 # Main event loop
